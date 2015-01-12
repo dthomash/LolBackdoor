@@ -1,0 +1,7 @@
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\obj\Debug\LolBackdoorTest.csprojResolveAssemblyReference.cache
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\bin\Debug\LolBackdoorTest.dll
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\bin\Debug\LolBackdoorTest.pdb
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\bin\Debug\lolBackdoor.dll
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\bin\Debug\lolBackdoor.pdb
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\obj\Debug\LolBackdoorTest.dll
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\obj\Debug\LolBackdoorTest.pdb

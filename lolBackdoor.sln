@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LolBackdoor", "lolBackdoor\LolBackdoor.csproj", "{9E57978C-F6DE-4AB3-8474-9C14B76367CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LolBackdoorTest", "LolBackdoorTest\LolBackdoorTest.csproj", "{8C436D56-EA7E-410D-B13D-89AAAEEDBF37}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E57978C-F6DE-4AB3-8474-9C14B76367CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E57978C-F6DE-4AB3-8474-9C14B76367CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E57978C-F6DE-4AB3-8474-9C14B76367CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E57978C-F6DE-4AB3-8474-9C14B76367CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C436D56-EA7E-410D-B13D-89AAAEEDBF37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C436D56-EA7E-410D-B13D-89AAAEEDBF37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C436D56-EA7E-410D-B13D-89AAAEEDBF37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C436D56-EA7E-410D-B13D-89AAAEEDBF37}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

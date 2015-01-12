@@ -1,0 +1,7 @@
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\obj\Debug\lolBackdoor.csprojResolveAssemblyReference.cache
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\bin\Debug\lolBackdoor.dll
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\bin\Debug\lolBackdoor.pdb
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\bin\Debug\Newtonsoft.Json.dll
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\bin\Debug\Newtonsoft.Json.xml
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\obj\Debug\lolBackdoor.dll
+d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\obj\Debug\lolBackdoor.pdb
