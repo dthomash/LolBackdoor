@@ -1,46 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using LolBackdoor.Config;
 
 namespace LolBackdoor
 {
-    public static class ServerApiConfigHelper
+    internal static class ServerApiConfigHelper
     {
         private const string AttrNameName = "name";
-        private const string ServerApiConfigFileName = "ServerAPIConfig.xml";
-        
-        public static Dictionary<string, string> GetServerApiVersions(LolRegion region)
-        {
-            Dictionary<string, string> serverApiVersions = null;
-            XmlDocument serverConfig = new XmlDocument();
-            serverConfig.Load(ServerApiConfigFileName);
-            if (serverConfig.HasChildNodes)
-            {
-                XmlElement lolElement = GetLeagueOfLegendsElement(serverConfig);
-                XmlElement serverElement = GetServerElement(region, lolElement);
-                serverApiVersions = GetServerApiVersions(serverElement);
-            }
-            return serverApiVersions;
-        }
 
-        private static Dictionary<string, string> GetServerApiVersions(XmlElement serverElement)
+        public static IEnumerable<XmlElement> GetServerApiElements(XmlElement serverElement)
         {
             return serverElement.ChildNodes
                 .OfType<XmlElement>()
-                .ToDictionary(x => x.GetAttribute("name"), x => x.GetElementsByTagName("version").OfType<XmlElement>().First().InnerText);
+                .First(element => element.Name == "apis")
+                .ChildNodes
+                .OfType<XmlElement>();
         }
 
-        private static XmlElement GetServerElement(LolRegion region, XmlElement lolElement)
+        public static IEnumerable<XmlElement> GetServerElements(XmlElement lolElement)
         {
-            return GetElementsByElementNameAndAttributeValue(lolElement, "server", "region", region.ToString())
-                .First();
+            return GetElementsByElementName(lolElement, "server");
         }
 
-        private static XmlElement GetLeagueOfLegendsElement(XmlDocument riotServerDoc)
+        public static XmlElement GetLeagueOfLegendsElement(XmlDocument riotServerDoc)
         {
             return GetElementsByNameAndElementName(riotServerDoc.DocumentElement, "game", "LeagueOfLegends")
                 .First();
         }
+
         private static IEnumerable<XmlElement> GetElementsByNameAndElementName(XmlElement node, string elementName, string name)
         {
             return GetElementsByElementNameAndAttributeValue(node, elementName, AttrNameName, name);
@@ -52,6 +40,12 @@ namespace LolBackdoor
             return node.GetElementsByTagName(elementName)
                 .OfType<XmlElement>()
                 .Where(x => x.HasAttribute(attrName) && x.GetAttribute(attrName) == attrValue);
+        }
+
+        private static IEnumerable<XmlElement> GetElementsByElementName(XmlElement node, string elementName)
+        {
+            return node.GetElementsByTagName(elementName)
+                .OfType<XmlElement>();
         }
     }
 }

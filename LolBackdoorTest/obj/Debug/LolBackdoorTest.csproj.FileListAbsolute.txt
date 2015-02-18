@@ -5,3 +5,12 @@ d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\bin\
 d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\bin\Debug\lolBackdoor.pdb
 d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\obj\Debug\LolBackdoorTest.dll
 d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\LolBackdoorTest\obj\Debug\LolBackdoorTest.pdb
+D:\MyDocs\League\LolBackdoor\LolBackdoorTest\obj\Debug\LolBackdoorTest.csprojResolveAssemblyReference.cache
+D:\MyDocs\League\LolBackdoor\LolBackdoorTest\obj\Debug\LolBackdoorTest.dll
+D:\MyDocs\League\LolBackdoor\LolBackdoorTest\obj\Debug\LolBackdoorTest.pdb
+D:\MyDocs\League\LolBackdoor\LolBackdoorTest\bin\Debug\LolBackdoorTest.dll
+D:\MyDocs\League\LolBackdoor\LolBackdoorTest\bin\Debug\LolBackdoorTest.pdb
+D:\MyDocs\League\LolBackdoor\LolBackdoorTest\bin\Debug\lolBackdoor.dll
+D:\MyDocs\League\LolBackdoor\LolBackdoorTest\bin\Debug\lolBackdoor.pdb
+D:\MyDocs\League\LolBackdoor\LolBackdoorTest\bin\Debug\Newtonsoft.Json.dll
+D:\MyDocs\League\LolBackdoor\LolBackdoorTest\bin\Debug\Newtonsoft.Json.xml

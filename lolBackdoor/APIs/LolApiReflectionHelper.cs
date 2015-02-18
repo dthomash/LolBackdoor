@@ -1,89 +1,35 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using LolBackdoor.APIs.ChampionApis;
-using LolBackdoor.APIs.GameApis;
-using LolBackdoor.APIs.LeagueApis;
-using LolBackdoor.APIs.LolStaticDataApis;
-using LolBackdoor.APIs.LolStatusApis;
-using LolBackdoor.APIs.MatchApis;
-using LolBackdoor.APIs.MatchHistoryApis;
-using LolBackdoor.APIs.StatsApis;
-using LolBackdoor.APIs.SummonerApis;
-using LolBackdoor.APIs.TeamApis;
+using LolBackdoor.Config;
 
 namespace LolBackdoor.APIs
 {
-    public class LolApiReflectionHelper
+    internal static class LolApiReflectionHelper
     {
-        private const string ChampionApiBaseClassName = "LolBackdoor.APIs.LolChampion.LolChampion";
-        private const string GameApiBaseClassName = "LolBackdoor.APIs.Game.Game";
-        private const string LeagueApiBaseClassName = "LolBackdoor.APIs.League.League";
-        private const string LolStaticDataApiBaseClassName = "LolBackdoor.APIs.LolStaticData.LolStaticData";
-        private const string LolStatusApiBaseClassName = "LolBackdoor.APIs.LolStatus.LolStatus";
-        private const string MatchApiBaseClassName = "LolBackdoor.APIs.Match.Match";
-        private const string MatchHistoryApiBaseClassName = "LolBackdoor.APIs.MatchHistory.MatchHistory";
-        private const string StatsApiBaseClassName = "LolBackdoor.APIs.Stats.Stats";
-        private const string SummonerApiBaseClassName = "LolBackdoor.APIs.Summoner.Summoner";
-        private const string TeamApiBaseClassName = "LolBackdoor.APIs.Team.Team";
-
-
-        public static ILolChampionApi GetLolChampionApi(string version)
+        private static readonly Dictionary<LolApi, string> ApiBaseClassNames = new Dictionary<LolApi, string>()
         {
-            var sanitizedVer = SanitizeVersionNumber(version);
-            return (ILolChampionApi) GetLolApi(ChampionApiBaseClassName + sanitizedVer);
-        }
+            {LolApi.Champion, "ChampionApis.Champion"},
+            {LolApi.Game, "GameApis.Game"},
+            {LolApi.League, "LeagueApis.League"},
+            {LolApi.Match, "MatchApis.Match"},
+            {LolApi.MatchHistory, "MatchHistoryApis.MatchHistory"},
+            {LolApi.StaticData, "StaticDataApis.StaticData"},
+            {LolApi.Stats, "StatsApis.Stats"},
+            {LolApi.Status, "StatusApis.Status"},
+            {LolApi.Summoner, "SummonerApis.Summoner"},
+            {LolApi.Team, "TeamApis.Team"}
+        };
 
-        public static ILolGameApi GetGameApi(string version)
-        {
-            var sanitizedVer = SanitizeVersionNumber(version);
-            return (ILolGameApi)GetLolApi(GameApiBaseClassName + sanitizedVer);
-        }
+        private const string BaseClassName = "LolBackdoor.APIs.";
 
-        public static ILolLeagueApi GetLeagueApi(string version)
+        internal static ILolApi GetLolApi(LolApiConfig config)
         {
-            var sanitizedVer = SanitizeVersionNumber(version);
-            return (ILolLeagueApi)GetLolApi(LeagueApiBaseClassName + sanitizedVer);
-        }
-
-        public static ILolStaticDataApi GetStaticDataApi(string version)
-        {
-            var sanitizedVer = SanitizeVersionNumber(version);
-            return (ILolStaticDataApi)GetLolApi(LolStaticDataApiBaseClassName + sanitizedVer);
-        }
-
-        public static ILolStatusApi GetStatusApi(string version)
-        {
-            var sanitizedVer = SanitizeVersionNumber(version);
-            return (ILolStatusApi)GetLolApi(LolStatusApiBaseClassName + sanitizedVer);
-        }
-
-        public static ILolMatchApi GetMatchApi(string version)
-        {
-            var sanitizedVer = SanitizeVersionNumber(version);
-            return (ILolMatchApi)GetLolApi(MatchApiBaseClassName + sanitizedVer);
-        }
-
-        public static ILolMatchHistoryApi GetMatchHistoryApi(string version)
-        {
-            var sanitizedVer = SanitizeVersionNumber(version);
-            return (ILolMatchHistoryApi)GetLolApi(MatchHistoryApiBaseClassName + sanitizedVer);
-        }
-
-        public static ILolStatsApi GetStatsApi(string version)
-        {
-            var sanitizedVer = SanitizeVersionNumber(version);
-            return (ILolStatsApi)GetLolApi(StatsApiBaseClassName + sanitizedVer);
-        }
-
-        public static ILolSummonerApi GetSummonerApi(string version)
-        {
-            var sanitizedVer = SanitizeVersionNumber(version);
-            return (ILolSummonerApi)GetLolApi(SummonerApiBaseClassName + sanitizedVer);
-        }
-
-        public static ILolTeamApi GetTeamApi(string version)
-        {
-            var sanitizedVer = SanitizeVersionNumber(version);
-            return (ILolTeamApi)GetLolApi(TeamApiBaseClassName + sanitizedVer);
+            var api = GetLolApi(BaseClassName + ApiBaseClassNames[config.Api] + SanitizeVersionNumber(config.Version));
+            api.Config = config;
+            return api;
         }
 
         private static string SanitizeVersionNumber(string versionNumber)
@@ -91,10 +37,25 @@ namespace LolBackdoor.APIs
             return versionNumber.Replace(".", "_");
         }
 
-        private static ILolApi GetLolApi(string apiFullyQualifiedClassName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="apiFullyQualifiedClassName"></param>
+        /// <returns>ILolApi objected based upon the api indicated in the fully qualified class name.  If null
+        /// there was an error constructing the object.</returns>
+        private static ILolApiWithConfig GetLolApi(string apiFullyQualifiedClassName)
         {
-            Type apiType = Type.GetType(apiFullyQualifiedClassName);
-            return apiType.GetConstructors()[0].Invoke(new object[] { }) as ILolApi;
+            var assemblyName = typeof (Champion1_2).AssemblyQualifiedName.ToString();
+            var apiType = Type.GetType(apiFullyQualifiedClassName + ", lolBackdoor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
+            if (apiType == null)
+            {
+                throw new ArgumentException("Provided fully qualified class name could not be evalutated to a Type.");
+            }
+
+            var api =
+                apiType.GetConstructors().First(ctr => !ctr.GetParameters().Any()).Invoke(new object[] { }) as ILolApiWithConfig;
+
+            return api;
         }
     }
 }

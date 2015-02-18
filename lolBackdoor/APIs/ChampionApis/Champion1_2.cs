@@ -1,22 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using LolBackdoor.Config;
 using LolBackdoor.Data.StaticData;
 
 namespace LolBackdoor.APIs.ChampionApis
 {
-    public class Champion1_2 : ILolChampionApi
+    internal class Champion1_2 : ILolChampionApi, ILolApiWithConfig
     {
-        public string GetApiName()
-        {
-            throw new NotImplementedException();
-        }
+        public LolApiConfig Config { get; set; }
+        public LolApi Api { get { return Config.Api; } }
+        public LolRegion Region { get { return  Config.Region; } }
+        public string Version { get { return Config.Version; } }
 
-        public string GetApiVersion()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<LolChampion> GetAllChampions()
+        public Dictionary<int, LolChampion> GetAllChampions()
         {
             throw new NotImplementedException();
         }

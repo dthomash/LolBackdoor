@@ -1,76 +1,94 @@
 ﻿using LolBackdoor.APIs.ChampionApis;
 using LolBackdoor.APIs.GameApis;
 using System.Collections.Generic;
+using System.Linq;
+using LolBackdoor.APIs;
 using LolBackdoor.APIs.LeagueApis;
-using LolBackdoor.APIs.LolStaticDataApis;
-using LolBackdoor.APIs.LolStatusApis;
+using LolBackdoor.APIs.StatusApis;
 using LolBackdoor.APIs.MatchApis;
 using LolBackdoor.APIs.MatchHistoryApis;
+using LolBackdoor.APIs.StaticDataApis;
 using LolBackdoor.APIs.StatsApis;
 using LolBackdoor.APIs.SummonerApis;
 using LolBackdoor.APIs.TeamApis;
+using LolBackdoor.Config;
 
 namespace LolBackdoor
 {
-    public enum LolRegion
-    {
-        BR,
-        EUW,
-        EUNE,
-        KR,
-        LAN,
-        LAS,
-        NA,
-        OCE,
-        RU,
-        TR
-    }
-
     public class LolServer
     {
-        private static Dictionary<LolRegion, LolServer> servers;
 
         /// <summary>
         ///     Yolo
         /// </summary>
-        public ILolChampionApi Champion { get; private set; }
-        public ILolGameApi Game { get; private set; }
-        public ILolLeagueApi League { get; private set; }
-        public ILolStaticDataApi LolStaticData { get; private set; }
-        public ILolStatusApi Status { get; private set; }
-        public ILolMatchApi Match { get; private set; }
-        public ILolMatchHistoryApi MatchHistory { get; private set; }
-        public ILolStatsApi Stats { get; private set; }
-        public ILolSummonerApi Summoner { get; private set; }
-        public ILolTeamApi Team { get; private set; }
 
-        private LolServer() { }
-
-        public static LolServer GetServer(LolRegion region)
+        public LolRegion Region
         {
-            LolServer server;
-            if (servers.TryGetValue(region, out server) && server != null)
-            {
-                return server;
-            }
-            else
-            {
-                server = NewServer(region);
-                servers.Add(region, server);
-                return server;
-            }
+            get { return _region; }
         }
 
-        public static LolServer NewServer(LolRegion region)
+        public ILolChampionApi ChampionApi
         {
-            var server = new LolServer();
-            var apiVersions = ServerApiConfigHelper.getServerApiVersions(region);
-
-            
-
-            return server;
+            get { return (ILolChampionApi) _apis[LolApi.Champion]; }
         }
 
-        
+        public ILolGameApi GameApi
+        {
+            get { return (ILolGameApi) _apis[LolApi.Game]; }
+        }
+
+        public ILolLeagueApi LeagueApi
+        {
+            get { return (ILolLeagueApi)_apis[LolApi.League]; }
+        }
+
+        public ILolMatchApi MatchApi
+        {
+            get { return (ILolMatchApi)_apis[LolApi.Match]; }
+        }
+
+        public ILolMatchHistoryApi MatchHistoryApi
+        {
+            get { return (ILolMatchHistoryApi)_apis[LolApi.MatchHistory]; }
+        }
+
+        public ILolStaticDataApi StaticDataApi
+        {
+            get { return (ILolStaticDataApi)_apis[LolApi.StaticData]; }
+        }
+
+        public ILolStatsApi StatsApi
+        {
+            get { return (ILolStatsApi)_apis[LolApi.Stats]; }
+        }
+
+        public ILolStatusApi StatusApi
+        {
+            get { return (ILolStatusApi)_apis[LolApi.Status]; }
+        }
+
+        public ILolSummonerApi SummonerApi
+        {
+            get { return (ILolSummonerApi)_apis[LolApi.Summoner]; }
+        }
+
+        public ILolTeamApi TeamApi
+        {
+            get { return (ILolTeamApi)_apis[LolApi.Team]; }
+        }
+
+        private readonly Dictionary<LolApi, ILolApi> _apis;
+        private readonly LolRegion _region;
+        private readonly string _serverEndpoint;
+
+        internal LolServer(LolServerConfig config)
+        {
+            _region = config.Region;
+            _serverEndpoint = config.Endpoint;
+            _apis = config.ApiConfigs.Values.ToDictionary(apiConfig => apiConfig.Api,
+                LolApiReflectionHelper.GetLolApi);
+        }
+
+
     }
 }

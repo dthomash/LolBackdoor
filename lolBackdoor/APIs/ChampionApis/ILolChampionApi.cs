@@ -5,7 +5,7 @@ namespace LolBackdoor.APIs.ChampionApis
 {
     public interface ILolChampionApi : ILolApi
     {
-        List<LolChampion> GetAllChampions();
+        Dictionary<int, LolChampion> GetAllChampions();
         LolChampion GetChampion(int id);
     }
 }

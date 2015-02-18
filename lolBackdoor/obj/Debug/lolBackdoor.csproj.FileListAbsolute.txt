@@ -5,3 +5,15 @@ d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\bin\Debu
 d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\bin\Debug\Newtonsoft.Json.xml
 d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\obj\Debug\lolBackdoor.dll
 d:\mydocs\documents\visual studio 2013\Projects\lolBackdoor\lolBackdoor\obj\Debug\lolBackdoor.pdb
+D:\MyDocs\League\LolBackdoor\lolBackdoor\obj\Debug\LolBackdoor.csprojResolveAssemblyReference.cache
+D:\MyDocs\League\LolBackdoor\lolBackdoor\obj\Debug\lolBackdoor.dll
+D:\MyDocs\League\LolBackdoor\lolBackdoor\obj\Debug\lolBackdoor.pdb
+D:\MyDocs\League\LolBackdoor\lolBackdoor\bin\Debug\lolBackdoor.dll
+D:\MyDocs\League\LolBackdoor\lolBackdoor\bin\Debug\lolBackdoor.pdb
+D:\MyDocs\League\LolBackdoor\lolBackdoor\bin\Debug\Newtonsoft.Json.dll
+D:\MyDocs\League\LolBackdoor\lolBackdoor\bin\Debug\Newtonsoft.Json.xml
+D:\MyDocs\League\LolBackdoor\lolBackdoor\bin\Debug\lolBackdoor.dll.config
+D:\MyDocs\League\LolBackdoor\lolBackdoor\bin\Debug\EntityFramework.dll
+D:\MyDocs\League\LolBackdoor\lolBackdoor\bin\Debug\EntityFramework.SqlServer.dll
+D:\MyDocs\League\LolBackdoor\lolBackdoor\bin\Debug\EntityFramework.xml
+D:\MyDocs\League\LolBackdoor\lolBackdoor\bin\Debug\EntityFramework.SqlServer.xml
